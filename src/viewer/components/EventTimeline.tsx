@@ -30,8 +30,7 @@ export function EventTimeline() {
     setAutoScroll(isAtBottom);
   };
 
-  // Reverse events to show newest at bottom
-  const reversedEvents = [...events].reverse();
+  // Use original events array - newest at bottom (terminal style)
 
   if (events.length === 0) {
     return (
@@ -50,11 +49,10 @@ export function EventTimeline() {
       className="flex-1 overflow-y-auto px-2 py-3"
       style={{ maxHeight: '400px' }}
     >
-      {reversedEvents.map((event, index) => (
+      {events.map((event) => (
         <EventNode
           key={event.id}
           event={event}
-          isLast={index === reversedEvents.length - 1}
         />
       ))}
     </div>

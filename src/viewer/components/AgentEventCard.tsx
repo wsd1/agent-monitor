@@ -40,14 +40,14 @@ export function AgentEventCard({ sessionId: _sessionId }: AgentEventCardProps) {
   return (
     <div className={`w-full max-w-md rounded-lg shadow-lg overflow-hidden transition-colors ${
       theme === 'dark' 
-        ? 'bg-gray-800 border border-gray-700' 
+        ? 'bg-[#1a1a1a] border border-[#2a2a2a]' 
         : 'bg-white border border-gray-200'
     }`}>
       {/* Head */}
       <div
         className={`px-4 py-3 cursor-pointer transition-colors ${
           theme === 'dark'
-            ? 'bg-gray-900 border-b border-gray-700'
+            ? 'bg-black border-b border-[#2a2a2a]'
             : 'bg-gray-50 border-b border-gray-200'
         }`}
         onClick={() => setCollapsed(!collapsed)}
@@ -129,7 +129,7 @@ export function AgentEventCard({ sessionId: _sessionId }: AgentEventCardProps) {
       {/* Foot - Turn information and token stats */}
       <div className={`px-4 py-2 border-t flex items-center justify-between text-xs transition-colors ${
         theme === 'dark'
-          ? 'bg-gray-900 border-gray-700 text-gray-400'
+          ? 'bg-black border-[#2a2a2a] text-gray-400'
           : 'bg-gray-50 border-gray-200 text-gray-500'
       }`}>
         <div className="flex items-center gap-4">

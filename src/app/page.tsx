@@ -7,8 +7,6 @@ import { useThemeStore } from '@/viewer/store/themeStore';
 export default function Home() {
   const { connect, disconnect } = useMQTT();
   const isConnected = useEventStore((state) => state.isConnected);
-  const events = useEventStore((state) => state.events);
-  const reset = useEventStore((state) => state.reset);
   
   // Theme
   const { theme, toggleTheme } = useThemeStore();
@@ -19,7 +17,7 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen p-8 transition-colors duration-200 ${
-      theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-800'
+      theme === 'dark' ? 'bg-black text-gray-100' : 'bg-gray-100 text-gray-800'
     }`}>
       <div className="max-w-4xl mx-auto">
         {/* Header with theme toggle */}
@@ -36,7 +34,7 @@ export default function Home() {
             onClick={toggleTheme}
             className={`px-3 py-2 rounded-lg flex items-center gap-2 transition-colors ${
               theme === 'dark' 
-                ? 'bg-gray-800 hover:bg-gray-700 text-gray-200' 
+                ? 'bg-[#1a1a1a] hover:bg-[#2a2a2a] text-gray-200' 
                 : 'bg-white hover:bg-gray-50 text-gray-700 border border-gray-200'
             }`}
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
@@ -57,7 +55,7 @@ export default function Home() {
 
         {/* Status Bar */}
         <div className={`rounded-lg shadow p-4 mb-6 flex items-center justify-between transition-colors ${
-          theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
+          theme === 'dark' ? 'bg-[#1a1a1a] border border-[#2a2a2a]' : 'bg-white border border-gray-200'
         }`}>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
@@ -66,12 +64,6 @@ export default function Home() {
                   isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-400'
                 }`}
               />
-              <span className="text-sm font-medium">
-                MQTT: {isConnected ? 'Connected' : 'Disconnected'}
-              </span>
-            </div>
-            <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
-              Events: {events.length}
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -84,7 +76,7 @@ export default function Home() {
                 placeholder="ws://localhost:9001"
                 className={`px-3 py-1 text-sm rounded transition-colors w-48 ${
                   theme === 'dark'
-                    ? 'bg-gray-700 border border-gray-600 text-gray-200 placeholder-gray-500'
+                    ? 'bg-[#2a2a2a] border border-[#3a3a3a] text-gray-200 placeholder-gray-500'
                     : 'bg-white border border-gray-300 text-gray-700 placeholder-gray-400'
                 }`}
                 disabled={isConnecting || isConnected}
@@ -103,7 +95,7 @@ export default function Home() {
                 disabled={isConnecting}
                 className={`px-3 py-1 text-sm rounded transition-colors min-w-20 ${
                   isConnecting
-                    ? (theme === 'dark' ? 'bg-gray-600 text-gray-400' : 'bg-gray-300 text-gray-500')
+                    ? (theme === 'dark' ? 'bg-[#2a2a2a] text-gray-400' : 'bg-gray-300 text-gray-500')
                     : isConnected
                     ? (theme === 'dark' ? 'bg-red-900 hover:bg-red-800 text-red-200' : 'bg-red-100 hover:bg-red-200 text-red-700')
                     : (theme === 'dark' ? 'bg-green-900 hover:bg-green-800 text-green-200' : 'bg-green-100 hover:bg-green-200 text-green-700')
@@ -112,17 +104,6 @@ export default function Home() {
                 {isConnecting ? '连接中...' : (isConnected ? '断开' : '连接')}
               </button>
             </div>
-            
-            <button
-              onClick={reset}
-              className={`px-3 py-1 text-sm rounded transition-colors ${
-                theme === 'dark' 
-                  ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' 
-                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-              }`}
-            >
-              Clear Events
-            </button>
           </div>
         </div>
 

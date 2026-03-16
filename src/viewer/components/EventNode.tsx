@@ -7,7 +7,6 @@ import { useThemeStore } from '../store/themeStore';
 
 interface EventNodeProps {
   event: UIEvent;
-  isLast: boolean;
 }
 
 type ToolDetails = {
@@ -23,7 +22,7 @@ type MessageDetails = {
   assistant?: string;
 } | null;
 
-export function EventNode({ event, isLast }: EventNodeProps) {
+export function EventNode({ event }: EventNodeProps) {
   const [expanded, setExpanded] = useState(false);
   const { theme } = useThemeStore();
 
@@ -67,14 +66,11 @@ export function EventNode({ event, isLast }: EventNodeProps) {
   const isMessageDetails = details !== null && 'user' in details;
 
   return (
-    <div className="relative flex gap-3">
-      {/* Timeline line */}
-      {!isLast && (
-        <div
-          className="absolute left-[4.5px] top-[5px] w-px h-full"
-          style={{ backgroundColor: `${event.color}40` }}
-        />
-      )}
+    <div className="relative flex items-center gap-3">
+      {/* Timeline line - continuous from top to bottom */}
+      <div
+        className="absolute left-[4px] top-0 bottom-0 w-0.5 bg-gray-600"
+      />
 
       {/* Dot */}
       <div
@@ -88,8 +84,9 @@ export function EventNode({ event, isLast }: EventNodeProps) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className={`
-            flex items-start gap-2 cursor-pointer
-            ${hasDetails ? 'hover:opacity-80' : ''}
+            flex items-start gap-2 p-1 rounded transition-colors duration-150
+            ${hasDetails ? 'cursor-pointer' : ''}
+            ${theme === 'dark' ? 'hover:bg-[#101010]' : 'hover:bg-gray-100'}
           `}
           onClick={handleClick}
         >
@@ -161,7 +158,7 @@ export function EventNode({ event, isLast }: EventNodeProps) {
                   <div className={`font-mono p-2 rounded text-sm ${
                     details.err 
                       ? (theme === 'dark' ? 'bg-red-900/30 text-red-300' : 'bg-red-50 text-red-600')
-                      : (theme === 'dark' ? 'bg-gray-700 text-gray-300' : 'bg-gray-50 text-gray-700')
+                      : (theme === 'dark' ? 'bg-[#2a2a2a] text-gray-300' : 'bg-gray-50 text-gray-700')
                   }`}>
                     {details.result || '(empty result)'}
                   </div>
