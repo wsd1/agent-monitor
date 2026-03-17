@@ -79,7 +79,7 @@ export function EventNode({ event }: EventNodeProps) {
       />
 
       {/* Content */}
-      <div className="flex-1 pb-4">
+      <div className="flex-1 pb-1">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
